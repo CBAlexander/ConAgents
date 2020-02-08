@@ -1,0 +1,65 @@
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS buildings;
+DROP TABLE IF EXISTS room;
+DROP TABLE IF EXISTS room_bookings;
+SET FOREIGN_KEY_CHECKS=1;
+
+CREATE TABLE IF NOT EXISTS employees (
+  id VARCHAR(40) NOT NULL PRIMARY KEY,
+  surname VARCHAR(50),
+  forename VARCHAR(50),
+  email VARCHAR(50) NOT NULL UNIQUE,
+  room_id INT(11) UNIQUE,
+  last_check_in_date DATE,
+  last_check_in_time TIME,
+  FOREIGN KEY (room_id) REFERENCES room(id)
+) ENGINE = INNODB;
+
+CREATE TABLE IF NOT EXISTS classes (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  class_name VARCHAR(100) NOT NULL,
+  class_code VARCHAR(100) NOT NULL UNIQUE,
+  lecturer VARCHAR(40) NOT NULL,
+  FOREIGN KEY (lecturer) REFERENCES employees(id)
+) ENGINE = INNODB;
+
+CREATE TABLE IF NOT EXISTS buildings (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  sudo_name VARCHAR(20) NOT NULL UNIQUE,
+  contact_id INT (11) NOT NULL UNIQUE,
+  FOREIGN KEY (contact_id) REFERENCES staff(id)
+) ENGINE = INNODB;
+
+CREATE TABLE IF NOT EXISTS room (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  room_name VARCHAR(50) NOT NULL UNIQUE,
+  building_id INT(11) NOT NULL,
+  num_people INT(11) NOT NULL,
+  num_computers INT(11),
+  hireable TINYINT(1),
+  FOREIGN KEY (building_id) REFERENCES buildings(id)
+) ENGINE = INNODB;
+
+CREATE TABLE IF NOT EXISTS room_bookings (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  surname VARCHAR(50),
+  forename VARCHAR(50),
+  email VARCHAR(50) NOT NULL UNIQUE,
+  room_id INT(11) NOT NULL UNIQUE,
+  date DATE NOT NULL,
+  time TIME NOT NULL,
+  FOREIGN KEY (room_id) REFERENCES room(id)
+) ENGINE = INNODB;
+
+/* INSERT STATEMENTS */
+
+DROP EVENT IF EXISTS `delete-checkin`;
+CREATE EVENT `delete-checkin`
+  ON SCHEDULE EVERY 1 HOUR
+  STARTS '2020-02-01 00:00:00'
+  ON COMPLETION PRESERVE
+DO
+  UPDATE `employees` SET `room_id` = NULL, `last_check_in_date` = NULL, `last_check_in_time` = NULL;
