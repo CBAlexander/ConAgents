@@ -1,11 +1,5 @@
 <?php
 
-/**
- *
- * [dbConnect Connection Object To DB]
- *
- */
-
 class dbConnect {
 
     private $conn;

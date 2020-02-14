@@ -1,11 +1,6 @@
 
 <?php
 
-/**
- * [define DB Constants]
- * @var [string]
- */
-
 define('DB_HOST', 'db5000298692.hosting-data.io');
 define('DB_USERNAME', 'dbu319113');
 define('DB_PASSWORD', 'mykgeh-gIzzez-5ginka');
