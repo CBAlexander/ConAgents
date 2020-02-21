@@ -1,0 +1,64 @@
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - stop
+  - bot_challenge
+  - book_room
+  - find_person
+  - future_events
+  - suggest_edit
+
+actions:
+- utter_greet
+- utter_goodbye
+- utter_affirm
+- utter_deny
+- utter_stop
+- utter_bot
+- utter_book
+- utter_find
+- utter_future_events
+- utter_edit
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_affirm:
+    - text: "Ok"
+
+  utter_deny:
+    - text: "Ok, what you want then?!"
+
+  utter_stop:
+    - text: "I am still a work in progress, sorry"
+
+  utter_bot:
+    - text: "I am little chinese boy. Inglish good?"
+
+  utter_book:
+    - text: "To confirm, you want me to book a room for you?"
+
+  utter_book2:
+    - text: "Please enter your details on the tablet to complete booking"
+
+  utter_find:
+    - text: "Let me find that person for you"
+
+  utter_future_events:
+    - text: "Let me see whats on"
+
+  utter_edit:
+    - text: "Do you want me to alert a human to look into this?"
+
+  utter_goodbye:
+  - text: "Bye, speak to you soon!"
+
+  utter_magic:
+    - text: "The following section has not been created yet. The action you requested will not be completed"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
