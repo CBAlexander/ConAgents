@@ -14,12 +14,7 @@ class dbConnect {
 
         if (mysqli_connect_errno()) {
 
-            $response = array();
-
-            $response['error'] = true;
-            $response['user'] = "Failed To Connect To MySQL: " . mysqli_connect_error();
-
-            echo json_encode($response);
+            die("Failed To Connect To MySQL: " . mysqli_connect_error());
 
         }
 

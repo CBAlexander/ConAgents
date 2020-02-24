@@ -1,1 +1,9 @@
-SHOULD NOT BE ABLE TO BOOK TWO DIFFERENT ROOMS TWICE USING SAME EMAIL
+intents:
+  - book_room
+  - find_person
+  - future_events
+  - suggest_edit
+  - user check in
+  - cancel_room
+
+ADD ANY MORE HERE:

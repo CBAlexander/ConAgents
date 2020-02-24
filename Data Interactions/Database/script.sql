@@ -33,9 +33,11 @@ CREATE TABLE IF NOT EXISTS employees (
   forename VARCHAR(50),
   email VARCHAR(50) NOT NULL UNIQUE,
   room_id INT(11) UNIQUE,
+  last_check_in_location INT(11) UNIQUE,
   last_check_in_date DATE,
   last_check_in_time TIME,
-  FOREIGN KEY (room_id) REFERENCES room(id)
+  FOREIGN KEY (room_id) REFERENCES room(id),
+  FOREIGN KEY (last_check_in_location) REFERENCES room(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS classes (
@@ -52,8 +54,10 @@ CREATE TABLE IF NOT EXISTS room_bookings (
   forename VARCHAR(50),
   email VARCHAR(50) NOT NULL,
   room_id INT(11) NOT NULL,
-  date DATE NOT NULL,
-  time TIME NOT NULL,
+  date_booked DATE NOT NULL,
+  time_booked TIME NOT NULL,
+  time_booked_until TIME NOT NULL,
+  length_min INT(3) NOT NULL,
   FOREIGN KEY (room_id) REFERENCES room(id)
 ) ENGINE = INNODB;
 
@@ -96,7 +100,7 @@ INSERT INTO `classes` (`class_name`, `class_code`, `lecturer`) VALUES
 ('Advanced Interaction Design', 'F20AD', '23e56790-4f83-11ea-8240-001a4a05014a'),
 ('Distributed & Parallel Tech', 'F20DP', '23e578be-4f83-11ea-8240-001a4a05014a');
 
-INSERT INTO `room_bookings` (`surname`, `forename`, `email`, `room_id`, `date`, `time`) VALUES ('Student', 'Generic', 'gstudent@hw.ac.uk', '9', '2020-02-15', '12:43:46');
+INSERT INTO `room_bookings` (`surname`, `forename`, `email`, `room_id`, `date_booked`, `time_booked`, `time_booked_until`, `length_min`) VALUES ('Student', 'Generic', 'gstudent@hw.ac.uk', '9', '2020-02-15', '12:43:46', '14:23:46', 100);
 
 /* EVENTS */
 
@@ -107,3 +111,11 @@ CREATE EVENT `delete-checkin`
   ON COMPLETION PRESERVE
 DO
   UPDATE `employees` SET `room_id` = NULL, `last_check_in_date` = NULL, `last_check_in_time` = NULL;
+
+DROP EVENT IF EXISTS `delete-bookings`;
+CREATE EVENT `delete-bookings`
+  ON SCHEDULE EVERY 1 HOUR
+  STARTS '2020-02-01 00:00:00'
+  ON COMPLETION PRESERVE
+DO
+  DELETE FROM `room_bookings` WHERE `date_booked` < CURDATE() OR `time_booked` < CURTIME();
