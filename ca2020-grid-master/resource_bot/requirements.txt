@@ -1,0 +1,3 @@
+gunicorn
+beautifulsoup4
+pytidylib

@@ -1,0 +1,43 @@
+- question: "Are you more interested in reading books or watching movies?"
+  options:
+    - preference: books
+      response: "Oh! A book worm! How nice. I like reading books on the cloud. Let's see, what else... "
+      pattern: "\\b(read(ing)?|books?)\\b"
+    - preference: movies
+      response: "A movie fan, huh? There are some really nice movies out lately! Personally, I enjoy audiobooks for obvious reasons... But let's move on. "
+      pattern: "\\b(movies?|films?)\\b"
+    - preference: both
+      response: "Awesome! Personally, I enjoy audiobooks for obvious reasons...  But let's move on. "
+      pattern: "\\b(either|both|do(n't| not) know)\\b"
+    - preference: none
+      response: "Alright! Let's move on then. "
+      pattern: "\\b(?:no|none|neither|any|(?:do(?:n't| not) (.*)(?:like|prefer|play|enjoy))|hate|dislike|tell me about something else)\\b"
+#- question: "What type of movies do you like? I like comedy."
+#  options:
+#  - preference: open
+#    response: null
+#    pattern: "(.*?)"
+#- question: "What sort of music you like? I am into rap music."
+#  options:
+#  - preference: open
+#    response: null
+#    pattern: "(.*?)"
+#- question: "What sports do you like? I like basketball."
+#  options:
+#  - preference: open
+#    response: null
+#    pattern: "(.*?)"
+- question: "Are you more interested in sports or video games?"
+  options:
+    - preference: sports
+      response: "Staying active is so healthy. Good for you! Personally I wish I had arms to play basketball. And eyes. And legs. Anyway... "
+      pattern: "\\bsports?\\b"
+    - preference: video games
+      response: "I love video games too! I think that Super Mario Odyssey is a really fun game! "
+      pattern: "\\b(video)? ?gam(e|es|ing)?\\b"
+    - preference: both
+      response: "It is good to keep a balance. I wish I could swim, but I'm allergic to water. "
+      pattern: "\\b(either|both|do(n't| not) know)\\b"
+    - preference: none
+      response: "Alright! Let's move on then. "
+      pattern: "\\b(?:no|none|neither|any|(?:do(?:n't| not) (.*)(?:like|prefer|play|enjoy))|hate|dislike|tell me about something else)\\b"

@@ -1,0 +1,15 @@
+# Configuration for Rasa NLU.
+language: "en"
+
+pipeline:
+  - name: "SpacyNLP"
+  - name: "SpacyTokenizer"
+  - name: "SpacyFeaturizer"
+  - name: "RegexFeaturizer"
+  - name: "CRFEntityExtractor"
+  - name: "EntitySynonymMapper"
+  - name: "SklearnIntentClassifier"
+  - name: "DucklingHTTPExtractor"
+    url: "http://rasa_duckling:8000"
+    locale: "en_GB"
+    dimensions: ["time"]
