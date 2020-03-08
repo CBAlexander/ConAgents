@@ -161,44 +161,52 @@ class dbOperation {
      * Find Last Check In For A Given Person
      *
      */
-      public function findPerson ($employeeEmail) {
+      public function findPerson ($employeeForename, $employeeSurname) {
 
-        $stmt = $this->conn->prepare ('SELECT
-            `forename`,
-            `surname`,
-            (SELECT `room_name` FROM `room` WHERE `id`=e.`room_id`) AS `office_room`,
-            (SELECT `sudo_name` FROM `buildings` WHERE `id`=(SELECT `building_id` FROM `room` WHERE `id`=e.`room_id`)) AS `building`,
-            (SELECT `room_name` FROM `room` WHERE `id`=e.`last_check_in_location`) AS `last_check_in_room`,
-            `last_check_in_date`,
-            `last_check_in_time`
-          FROM `employees` e WHERE `email`=?;');
+        if ($this->isUserExistName($employeeForename, $employeeSurname)) {
 
-        $stmt->bind_param ('s', $employeeEmail);
+          $stmt = $this->conn->prepare ('SELECT
+              `forename`,
+              `surname`,
+              (SELECT `room_name` FROM `room` WHERE `id`=e.`room_id`) AS `office_room`,
+              (SELECT `sudo_name` FROM `buildings` WHERE `id`=(SELECT `building_id` FROM `room` WHERE `id`=e.`room_id`)) AS `building`,
+              (SELECT `room_name` FROM `room` WHERE `id`=e.`last_check_in_location`) AS `last_check_in_room`,
+              `last_check_in_date`,
+              `last_check_in_time`
+            FROM `employees` e WHERE `forename`=? AND `surname`=?;');
 
-        if ($stmt->execute ()) {
+          $stmt->bind_param ('ss', $employeeForename, $employeeSurname);
 
-          $result = $stmt->get_result();
-          $res = array();
+          if ($stmt->execute ()) {
 
-          while ($data = $result->fetch_assoc()) {
+            $result = $stmt->get_result();
+            $res = array();
 
-              array_push($res, $data);
+            while ($data = $result->fetch_assoc()) {
 
-          }
+                array_push($res, $data);
 
-          if ($res[0]['last_check_in_date'] != NULL && $res[0]['last_check_in_time'] != NULL) {
+            }
 
-            return $res;
+            if ($res[0]['last_check_in_date'] != NULL && $res[0]['last_check_in_time'] != NULL) {
+
+              return $res;
+
+            } else {
+
+              return -2;
+
+            }
 
           } else {
 
-            return -2;
+            return -1;
 
           }
 
         } else {
 
-          return -1;
+          return -3;
 
         }
 
@@ -267,35 +275,63 @@ class dbOperation {
      */
       public function userCheckIn ($employeeEmail, $roomName, $buildingName) {
 
-          $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?);');
-          $stmt->bind_param ('ss', $roomName, $buildingName);
-          $stmt->execute ();
-          $stmt->store_result();
+          if ($this->isUserExistEmail($employeeEmail)) {
 
-          if ( $stmt->num_rows > 0 ) {
+            $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?);');
+            $stmt->bind_param ('ss', $roomName, $buildingName);
+            $stmt->execute ();
+            $stmt->store_result();
 
-            $stmt = $this->conn->prepare ('UPDATE `employees` SET
-              `last_check_in_location`=(SELECT `id` FROM `room` WHERE `room_name`=?),
-              `last_check_in_date`=CURDATE(),
-              `last_check_in_time`=CURTIME()
-            WHERE `email`=?');
-            $stmt->bind_param ('ss', $roomName, $employeeEmail);
+            if ( $stmt->num_rows > 0 ) {
 
-            if ($stmt->execute ()) {
+              $stmt = $this->conn->prepare ('UPDATE `employees` SET
+                `last_check_in_location`=(SELECT `id` FROM `room` WHERE `room_name`=?),
+                `last_check_in_date`=CURDATE(),
+                `last_check_in_time`=CURTIME()
+              WHERE `email`=?');
+              $stmt->bind_param ('ss', $roomName, $employeeEmail);
 
-              return true;
+              if ($stmt->execute ()) {
+
+                return true;
+
+              } else {
+
+                return -1;
+
+              }
 
             } else {
 
-              return -1;
+              return -2;
 
             }
 
           } else {
 
-            return -2;
+            return -3;
 
           }
+
+      }
+
+      private function isUserExistEmail ($email) {
+
+        $stmt = $this->conn->prepare('SELECT `id` FROM `employees` WHERE `email` = ?;');
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+
+      }
+
+      private function isUserExistName ($forename, $surname) {
+
+        $stmt = $this->conn->prepare('SELECT `id` FROM `employees` WHERE `forename` = ? AND `surname` = ?;');
+        $stmt->bind_param('ss', $forename, $surname);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
 
       }
 

@@ -24,6 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $response['error'] = true;
           $response['message'] = 'Room Does Not Exist In Given Building';
 
+        } else if ($res === -3) {
+
+          $response['error'] = true;
+          $response['message'] = 'Given Email Is Not A Registered Employee';
+
         } else {
 
           $response['error'] = false;

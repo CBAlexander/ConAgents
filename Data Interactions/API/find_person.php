@@ -9,10 +9,10 @@ $response = array ();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    if (isset($_POST['employee_email'])) {
+    if (isset($_POST['employee_forename']) && isset($_POST['employee_surname'])) {
 
         $db = new DbOperation();
-        $res = $db->findPerson($db->noHTML($_POST['employee_email']));
+        $res = $db->findPerson($db->noHTML($_POST['employee_forename']), $db->noHTML($_POST['employee_surname']));
 
         if ($res === -1) {
 
@@ -22,7 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else if ($res === -2) {
 
           $response['error'] = true;
-          $response['message'] = $_POST['employee_email'].' Has Not Checked In Today';
+          $response['message'] = $_POST['employee_forename'].' '.$_POST['employee_surname'].' Has Not Checked In Today';
+
+        } else if ($res === -3) {
+
+          $response['error'] = true;
+          $response['message'] = $_POST['employee_forename'].' '.$_POST['employee_surname'].' Is Not A Registered Employee';
 
         } else {
 
