@@ -12,6 +12,9 @@
 - hi Mister
 - hi pal!
 - hi there
+- hi alana
+- hello alana
+- greetings alana
 - greetings
 - hello everybody
 - hello is anybody there
@@ -87,7 +90,7 @@
 ## intent:find_person
 - where is [Tomasz Mosak](person)
 - is [Cory Alexander](person) currently available?
-- where will I find [Mr Convey](person)
+- where will I find Mr [Convey](person)
 
 # intent:future_events
 - what is happening [tomorrow](date)

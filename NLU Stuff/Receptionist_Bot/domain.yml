@@ -10,6 +10,20 @@ intents:
   - future_events
   - suggest_edit
 
+entities:
+  - room
+  - person
+  - event
+
+slots:
+  room:
+    type: text
+  person:
+    type: text
+  event:
+    type: text
+
+
 actions:
 - utter_greet
 - utter_goodbye
@@ -21,6 +35,7 @@ actions:
 - utter_find
 - utter_future_events
 - utter_edit
+- action_find_person
 
 responses:
   utter_greet:

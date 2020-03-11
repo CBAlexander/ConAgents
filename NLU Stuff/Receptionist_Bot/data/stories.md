@@ -12,6 +12,7 @@
   - utter_greet
 * find_person
   - utter_find
+  - action_find_person
   - utter_magic
 
 ## future events path
