@@ -97,7 +97,7 @@
 - any events on [this week](time_period)
 - any events involving [Artificial Intelligence](subject) in the [near future](time_period)
 
-[comment]: # (Need to create custom python actions for the above)
+[comment]: # (Need to finish custom python actions)
 
 ## intent:suggest_edit
 - Pretty sure that the room for [Jack Walker](person) is incorrect
@@ -118,7 +118,14 @@ data/lookups/people.txt
 - saturday
 - sunday
 
-## regex:room_number
-- G.[1-7]{1}
-
-[comment]: # (Need to rework regex for room number)
+## lookup:room_number
+1.45
+1.44
+1.43
+1.42
+1.41
+1.21
+1.22
+1.23
+Research Room
+Robotics Room

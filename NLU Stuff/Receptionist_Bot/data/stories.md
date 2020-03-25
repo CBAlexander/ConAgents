@@ -1,35 +1,40 @@
-## booking path
+## find_person
 * greet
-  - utter_greet
-* book_room
-  - utter_book
-* affirm
-  - utter_book2
-  - utter_magic
-
-## find person path
-* greet
-  - utter_greet
+    - utter_greet
 * find_person
-  - utter_find
-  - action_find_person
-  - utter_magic
+    - utter_find
+    - action_find_person
+    
+## booking
+* greet
+    - utter_greet
+* book_room
+    - utter_book
+* affirm
+    - utter_details_requested
+    - action_display_booking_form
+* deny
+     - utter_deny
 
-## future events path
+## future_events
 * greet
   - utter_greet
 * future_events
   - utter_future_events
-  - utter_magic
+  - action_find_event
 
-## edit details path
+## suggest_an_edit
 * greet
   - utter_greet
 * suggest_edit
   - utter_edit
-  - utter_magic
+* affirm
+  - action_send_email
+* deny
+   - utter_deny
 
-## say goodbye
+## stop_system
 * goodbye
   - utter_goodbye
-
+* stop
+  - utter_stop

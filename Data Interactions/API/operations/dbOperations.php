@@ -223,8 +223,8 @@ class dbOperation {
             `date_booked`,
             `time_booked`
           FROM `room_bookings` WHERE
-            `date_booked` > CURDATE() AND
-            `time_booked` > CURTIME() AND
+            (`date_booked` > CURDATE() OR
+            (`date_booked` = CURDATE() AND `time_booked` > CURTIME())) AND
             `room_id`=(SELECT `id` FROM `room` WHERE `room_name`=? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?));');
 
         $stmt->bind_param ('ss', $employeeEmail, $buildingName);

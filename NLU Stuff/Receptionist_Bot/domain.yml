@@ -4,7 +4,6 @@ intents:
   - affirm
   - deny
   - stop
-  - bot_challenge
   - book_room
   - find_person
   - future_events
@@ -13,16 +12,24 @@ intents:
 entities:
   - room
   - person
-  - event
+  - event_building
+  - event_building
+  - edit_email
+  - edit_message
 
 slots:
   room:
     type: text
   person:
     type: text
-  event:
+  event_building:
     type: text
-
+  event_room:
+    type: text
+  edit_email:
+    type: text
+  edit_message:
+    type: text
 
 actions:
 - utter_greet
@@ -32,10 +39,14 @@ actions:
 - utter_stop
 - utter_bot
 - utter_book
+- utter_details_requested
 - utter_find
 - utter_future_events
 - utter_edit
 - action_find_person
+- action_display_booking_form
+- action_send_email
+- action_find_event
 
 responses:
   utter_greet:
@@ -56,7 +67,7 @@ responses:
   utter_book:
     - text: "To confirm, you want me to book a room for you?"
 
-  utter_book2:
+  utter_details_requested:
     - text: "Please enter your details on the tablet to complete booking"
 
   utter_find:
