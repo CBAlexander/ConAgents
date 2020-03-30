@@ -83,8 +83,8 @@
 - am I talking to a human?
 
 ## intent:book_room
-- I'd like to book room [G.7](room_number)
-- book me room [G.2](room_number)
+- I'd like to book room [1.45](room_number)
+- book me room [1.45](room_number)
 - could you please book me a room
 
 ## intent:find_person

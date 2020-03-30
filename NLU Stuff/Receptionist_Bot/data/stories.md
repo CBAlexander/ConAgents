@@ -32,6 +32,23 @@
   - action_send_email
 * deny
    - utter_deny
+   
+## cancellation
+* greet
+ - utter_greet
+* cancel_room
+ - utter_cancel
+* affirm
+ - action_cancel_booking
+* deny
+  - utter_deny
+  
+## check_in
+* greet
+  - utter_greet
+* check_in
+  - utter_check_in
+  - action_check_in
 
 ## stop_system
 * goodbye

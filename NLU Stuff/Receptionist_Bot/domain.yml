@@ -5,30 +5,29 @@ intents:
   - deny
   - stop
   - book_room
+  - cancel_room
   - find_person
   - future_events
+  - check_in
   - suggest_edit
 
 entities:
   - room
   - person
-  - event_building
-  - event_building
-  - edit_email
-  - edit_message
+  - building
+  - email
+  - message
 
 slots:
   room:
     type: text
   person:
     type: text
-  event_building:
+  building:
     type: text
-  event_room:
+  email:
     type: text
-  edit_email:
-    type: text
-  edit_message:
+  message:
     type: text
 
 actions:
@@ -37,16 +36,20 @@ actions:
 - utter_affirm
 - utter_deny
 - utter_stop
-- utter_bot
 - utter_book
+- utter_cancel
 - utter_details_requested
 - utter_find
+- utter_check_in
 - utter_future_events
 - utter_edit
+- action_hello_world
 - action_find_person
 - action_display_booking_form
 - action_send_email
 - action_find_event
+- action_cancel_booking
+- action_check_in
 
 responses:
   utter_greet:
@@ -61,15 +64,18 @@ responses:
   utter_stop:
     - text: "I am still a work in progress, sorry"
 
-  utter_bot:
-    - text: "I am little chinese boy. Inglish good?"
-
   utter_book:
     - text: "To confirm, you want me to book a room for you?"
+
+  utter_cancel:
+    - text: "To confirm, you want me to cancel a room for you?"
 
   utter_details_requested:
     - text: "Please enter your details on the tablet to complete booking"
 
+  utter_check_in:
+    - text: "Let me check you in"
+    
   utter_find:
     - text: "Let me find that person for you"
 

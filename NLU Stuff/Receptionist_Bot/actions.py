@@ -14,7 +14,7 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-
+from rasa_sdk.events import SlotSet
 
 class ActionHelloWorld(Action):
 
@@ -48,7 +48,8 @@ class FindPerson(Action):
         message = json.load(result)
 
         dispatcher.utter_message(text=data['employee_forename'] + " " + data['employee_surname'] + " is in " + message['message'])
-        return []
+        
+        return [SlotSet("person", None)]
 
 class DisplayEventsForm(Action):
 
@@ -59,8 +60,57 @@ class DisplayEventsForm(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         booking_form_url = "http://portal.hw.ac.uk"
-        # open a URL
-        return []
+        # open book_form_url URL - noted in the simulated database to show cancel booking
+        
+        api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/book_room.php"
+        data = { 'user': 'dbu319113',
+                 'pass': 'mykgeh-gIzzez-5ginka',
+                 'employee_forename': re.split( next(tracker.get_latest_entity_values("person"), None), delimiter=" ")[0],
+                 'employee_surname': re.split( next(tracker.get_latest_entity_values("person"), None), delimiter=" ")[1],
+                 'email': next(tracker.get_latest_entity_values("email"), None),
+                 'room_name': next(tracker.get_latest_entity_values("room"), None),
+                 'building_name': next(tracker.get_latest_entity_values("building"), None),
+                 'book_date': '2020-04-29',
+                 'book_time': '00:00',
+                 'length_min': '20'}
+
+        result = requests.post(url=api_endpoint, data=data)
+        message = json.load(result)
+
+        #dispatcher.utter_message(text="Please enter your booking details on this form")
+        dispatcher.utter_message(text="Your booking has been processed. A confirmation email will be sent to you")
+        
+        return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+
+class CancelBooking(Action):
+
+    def name(self) -> Text:
+        return "action_cancel_booking"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        canel_booking_form_url = "http://portal.hw.ac.uk"
+        # open canel_booking_form_url URL - noted in the simulated database to show cancel booking
+        
+        api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/cancel_room.php"
+        data = { 'user': 'dbu319113',
+                 'pass': 'mykgeh-gIzzez-5ginka',
+                 'employee_forename': re.split( next(tracker.get_latest_entity_values("person"), None), delimiter=" ")[0],
+                 'employee_surname': re.split( next(tracker.get_latest_entity_values("person"), None), delimiter=" ")[1],
+                 'email': next(tracker.get_latest_entity_values("email"), None),
+                 'room_name': next(tracker.get_latest_entity_values("room"), None),
+                 'building_name': next(tracker.get_latest_entity_values("building"), None),
+                 'book_date': '2020-04-29',
+                 'book_time': '00:00'}
+
+        result = requests.post(url=api_endpoint, data=data)
+        message = json.load(result)
+
+        #dispatcher.utter_message(text="Please select your booking on this webpage")
+        dispatcher.utter_message(text="Your booking has been cancelled. A confirmation email will be sent to you")
+        
+        return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
 
 class SendEmail(Action):
 
@@ -72,8 +122,8 @@ class SendEmail(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php"
         
-        email = next(tracker.get_latest_entity_values("edit_email"), None)
-        message = next(tracker.get_latest_entity_values("edit_message"), None)
+        email = next(tracker.get_latest_entity_values("email"), None)
+        message = next(tracker.get_latest_entity_values("message"), None)
         
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
@@ -84,8 +134,33 @@ class SendEmail(Action):
         message = json.load(result)
         
         dispatcher.utter_message(text="Your suggested edit has been sent")
-        return []
+        
+        return [SlotSet("email", None), SlotSet("message", None)]
+        
+        
+class CheckIn(Action):
 
+def name(self) -> Text:
+    return "action_check_in"
+
+def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/employee_check_in.php"
+    
+    data = { 'user': 'dbu319113',
+             'pass': 'mykgeh-gIzzez-5ginka',
+             'employee_email': next(tracker.get_latest_entity_values("email"), None),
+             'room_name': next(tracker.get_latest_entity_values("room"), None),
+             'building_name': next(tracker.get_latest_entity_values("building")}
+    
+    result = requests.post(url=api_endpoint, data=data)
+    message = json.load(result)
+    
+    dispatcher.utter_message(text="Your checked in to this location")
+    
+    return [SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+        
 class FindEvents(Action):
 
     def name(self) -> Text:
@@ -96,8 +171,8 @@ class FindEvents(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/future_events.php"
         
-        room = next(tracker.get_latest_entity_values("event_room"), None)
-        building = next(tracker.get_latest_entity_values("event_building"), None)
+        room = next(tracker.get_latest_entity_values("room"), None)
+        building = next(tracker.get_latest_entity_values("building"), None)
         
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
@@ -118,7 +193,8 @@ class FindEvents(Action):
         response = response[:-1]
         
         dispatcher.utter_message(text=message)
-        return []
+        
+        return [SlotSet("room", None), SlotSet("building", None)]
 
 
 
