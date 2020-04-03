@@ -10,6 +10,7 @@
 import requests
 import json
 import regex as re
+from datetime import datetime
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -59,9 +60,12 @@ class DisplayEventsForm(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # open book_form_url URL
         booking_form_url = "http://portal.hw.ac.uk"
-        # open book_form_url URL - noted in the simulated database to show cancel booking
-        
+
+        # noted in database only to simulate a response
+        # book_date, book_time and length_min are all given on booking_form
+        """
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/book_room.php"
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
@@ -73,14 +77,16 @@ class DisplayEventsForm(Action):
                  'book_date': '2020-04-29',
                  'book_time': '00:00',
                  'length_min': '20'}
-
+        
         result = requests.post(url=api_endpoint, data=data)
         message = json.load(result)
+        """
 
-        #dispatcher.utter_message(text="Please enter your booking details on this form")
-        dispatcher.utter_message(text="Your booking has been processed. A confirmation email will be sent to you")
+        dispatcher.utter_message(text="Please enter your booking details on this form")
+        """dispatcher.utter_message(text="Your booking has been processed. A confirmation email will be sent to you")"""
         
-        return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+        """return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]"""
+        return []
 
 class CancelBooking(Action):
 
@@ -90,9 +96,12 @@ class CancelBooking(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # open canel_booking_form_url URL
         canel_booking_form_url = "http://portal.hw.ac.uk"
-        # open canel_booking_form_url URL - noted in the simulated database to show cancel booking
         
+        # noted in database only to simulate a response
+        # book_date, book_time are all taken from event selected to cancel on cancel_booking_form
+        """
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/cancel_room.php"
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
@@ -106,11 +115,13 @@ class CancelBooking(Action):
 
         result = requests.post(url=api_endpoint, data=data)
         message = json.load(result)
+        """
 
-        #dispatcher.utter_message(text="Please select your booking on this webpage")
-        dispatcher.utter_message(text="Your booking has been cancelled. A confirmation email will be sent to you")
+        dispatcher.utter_message(text="Please select your booking on this webpage")
+        """dispatcher.utter_message(text="Your booking has been cancelled. A confirmation email will be sent to you")"""
         
-        return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+        """return [SlotSet("person", None), SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]"""
+        return []
 
 class SendEmail(Action):
 
@@ -121,14 +132,10 @@ class SendEmail(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php"
-        
-        email = next(tracker.get_latest_entity_values("email"), None)
-        message = next(tracker.get_latest_entity_values("message"), None)
-        
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
-                 'recipient_email': email,
-                 'message': message}
+                 'recipient_email': next(tracker.get_latest_entity_values("email"), None),
+                 'message': next(tracker.get_latest_entity_values("message"), None)}
         
         result = requests.post(url=api_endpoint, data=data)
         message = json.load(result)
@@ -140,27 +147,25 @@ class SendEmail(Action):
         
 class CheckIn(Action):
 
-def name(self) -> Text:
-    return "action_check_in"
+    def name(self) -> Text:
+        return "action_check_in"
 
-def run(self, dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-    api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/employee_check_in.php"
-    
-    data = { 'user': 'dbu319113',
-             'pass': 'mykgeh-gIzzez-5ginka',
-             'employee_email': next(tracker.get_latest_entity_values("email"), None),
-             'room_name': next(tracker.get_latest_entity_values("room"), None),
-             'building_name': next(tracker.get_latest_entity_values("building")}
-    
-    result = requests.post(url=api_endpoint, data=data)
-    message = json.load(result)
-    
-    dispatcher.utter_message(text="Your checked in to this location")
-    
-    return [SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/employee_check_in.php"
+        data = { 'user': 'dbu319113',
+                 'pass': 'mykgeh-gIzzez-5ginka',
+                 'employee_email': next(tracker.get_latest_entity_values("email"), None),
+                 'room_name': next(tracker.get_latest_entity_values("room"), None),
+                 'building_name': next(tracker.get_latest_entity_values("building"))}
         
+        requests.post(url=api_endpoint, data=data)
+        
+        dispatcher.utter_message(text="Your checked in to this location")
+        
+        return [SlotSet("email", None), SlotSet("room", None), SlotSet("building", None)]
+
 class FindEvents(Action):
 
     def name(self) -> Text:
@@ -170,30 +175,25 @@ class FindEvents(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         api_endpoint = "https://www.matthewfrankland.co.uk/conv-agents/future_events.php"
-        
         room = next(tracker.get_latest_entity_values("room"), None)
         building = next(tracker.get_latest_entity_values("building"), None)
-        
+
         data = { 'user': 'dbu319113',
                  'pass': 'mykgeh-gIzzez-5ginka',
                  'room_name': room,
                  'building_name': building}
-        
         result = requests.post(url=api_endpoint, data=data)
         message = json.load(result)
         
-        response = room + " is booked at the following times: ";
+        response = room + " is booked at the following times: "
         
-        for (booking in message) {
-            datetimeObj = datetime.strptime(message['date_booked'].'T'.message['time_booked'], '%d %B %Y %H:%M')
-            
-            response += datetimeObj ", "
-        }
+        for booking in message:
+            response += datetime.strptime(booking['date_booked'] + "T" + booking['time_booked'], '%Y-%m-%dT%H:%M:%S').strftime('%d %B %Y %H:%M') + ", "
         
-        response = response[:-1]
+        response = response[:-2]
         
         dispatcher.utter_message(text=message)
-        
+
         return [SlotSet("room", None), SlotSet("building", None)]
 
 
