@@ -1,0 +1,8 @@
+printer
+toilet
+computer
+air conditioner
+whiteboard
+door
+window
+table
