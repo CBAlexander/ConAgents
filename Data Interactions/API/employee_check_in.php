@@ -9,30 +9,25 @@ $response = array ();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    if (isset($_POST['employee_email']) && isset($_POST['room_name']) && isset($_POST['building_name'])) {
+    if (isset($_POST['employee']) && isset($_POST['room_name'])) {
 
         $db = new DbOperation();
-        $res = $db->userCheckIn($db->noHTML($_POST['employee_email']), $db->noHTML($_POST['room_name']), $db->noHTML($_POST['building_name']));
+        $res = $db->userCheckIn($db->noHTML($_POST['employee']), $db->noHTML($_POST['room_name']));
 
         if ($res === -1) {
 
           $response['error'] = true;
-          $response['message'] = 'An Unexpected Error Occured';
+          $response['message'] = 'An unexpected error occured.';
 
         } else if ($res === -2) {
 
           $response['error'] = true;
-          $response['message'] = 'Room Does Not Exist In Given Building';
-
-        } else if ($res === -3) {
-
-          $response['error'] = true;
-          $response['message'] = 'Given Email Is Not A Registered Employee';
+          $response['message'] = 'Given employee is not registered in this institution.';
 
         } else {
 
           $response['error'] = false;
-          $response['message'] = 'User Checked In';
+          $response['message'] = 'Check in successful.';
 
         }
 

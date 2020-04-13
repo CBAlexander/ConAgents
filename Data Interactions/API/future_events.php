@@ -9,10 +9,10 @@ $response = array ();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    if (isset($_POST['room_name']) && isset($_POST['building_name'])) {
+    if (isset($_POST['room_name'])) {
 
         $db = new DbOperation();
-        $res = $db->futureEvents($db->noHTML($_POST['room_name']), $db->noHTML($_POST['building_name']));
+        $res = $db->futureEvents($db->noHTML($_POST['room_name']));
 
         if ($res === -1) {
 

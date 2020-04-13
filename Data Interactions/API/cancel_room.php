@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($_POST['surname']) &&
         isset($_POST['email']) &&
         isset($_POST['room_name']) &&
-        isset($_POST['building_name']) &&
         isset($_POST['book_date']) &&
         isset($_POST['book_time'])
       ) {
@@ -24,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $db->noHTML($_POST['surname']),
           $db->noHTML($_POST['email']),
           $db->noHTML($_POST['room_name']),
-          $db->noHTML($_POST['building_name']),
           $db->noHTML($_POST['book_date']),
           $db->noHTML($_POST['book_time'])
         );
@@ -32,17 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($res === -1) {
 
           $response['error'] = true;
-          $response['message'] = 'An Unexpected Error Occured';
+          $response['message'] = 'An unexpected error occured. Please try again later.';
 
         } else if ($res === -2) {
 
           $response['error'] = true;
-          $response['message'] = 'Room Booking Could Not Be Found';
+          $response['message'] = 'I couldn\'t find your room booking.';
+
+        } else if ($res === -3) {
+
+          $response['error'] = true;
+          $response['message'] = 'This room does not exist in this building.';
 
         } else {
 
           $response['error'] = false;
-          $response['message'] = 'Room Cancelled';
+          $response['message'] = 'Please complete your cancellation using this form. I have also removed your booking from our simulated database so that my test system can function on future requests.';
 
         }
 

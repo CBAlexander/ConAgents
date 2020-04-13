@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS employees (
   forename VARCHAR(50),
   email VARCHAR(50) NOT NULL UNIQUE,
   room_id INT(11) UNIQUE,
-  last_check_in_location INT(11) UNIQUE,
+  last_check_in_location INT(11),
   last_check_in_date DATE,
   last_check_in_time TIME,
   FOREIGN KEY (room_id) REFERENCES room(id),
@@ -70,13 +70,13 @@ INSERT INTO `buildings` (`name`, `sudo_name`, `surname_contact`, `forename_conta
 
 INSERT INTO `room` (`id`, `room_name`, `building_id`, `num_people`, `num_computers`, `hireable`) VALUES
 (1, '1.45', 3, 1, 1, 0),
-(2, '1.44', 3, 1, 1, 0),
-(3, '1.43', 3, 1, 1, 0),
-(4, '1.42', 3, 1, 1, 0),
+(2, '1.44', 3, 1, 3, 0),
+(3, '1.43', 3, 1, 15, 0),
+(4, '1.42', 3, 1, 5, 0),
 (5, '1.41', 3, 1, 1, 0),
-(6, '1.21', 3, 1, 1, 0),
-(7, '1.22', 3, 1, 1, 0),
-(8, '1.23', 3, 1, 1, 0),
+(6, '1.21', 3, 1, 6, 0),
+(7, '1.22', 3, 1, 7, 0),
+(8, '1.23', 3, 1, 2, 0),
 (9, 'Research Room', 1, 20, 10, 1),
 (10, 'Robotics Room', 2, 7, 3, 1);
 
@@ -85,10 +85,10 @@ INSERT INTO `employees` (`id`, `surname`, `forename`, `email`, `room_id`, `last_
 ('23e51ad6-4f83-11ea-8240-001a4a05014a', 'Berg', 'Tessa', 'tberg@hw.ac.uk', 2, '2020-02-05', '10:28:10'),
 ('23e52864-4f83-11ea-8240-001a4a05014a', 'Kenwright', 'Benjamin', 'bjenwright@hw.ac.uk', 3, NULL, NULL),
 ('23e535ea-4f83-11ea-8240-001a4a05014a', 'Lemon', 'Oliver', 'olemon@hw.ac.uk', 4, '2020-02-04', '10:28:10'),
-('23e54437-4f83-11ea-8240-001a4a05014a', 'Chumbe', 'Santiago', 'schumbe@hw.ac.uk', 5, NULL, NULL),
-('23e55659-4f83-11ea-8240-001a4a05014a', 'Chantler', 'Mike', 'mchantler@hw.ac.uk', 6, '2020-02-18', '10:28:10'),
-('23e56790-4f83-11ea-8240-001a4a05014a', 'Baillie', 'Lynne', 'lbaillie@hw.ac.uk', 7, NULL, NULL),
-('23e578be-4f83-11ea-8240-001a4a05014a', 'Stewart', 'Rob', 'rstewart@hw.ac.uk', 8, NULL, NULL);
+('23e54437-4f83-11ea-8240-001a4a05014a', 'Frankland', 'Matthew', 'mfranklnad@hw.ac.uk', 5, NULL, NULL),
+('23e55659-4f83-11ea-8240-001a4a05014a', 'Walker', 'Jack', 'jwalker@hw.ac.uk', 6, '2020-02-18', '10:28:10'),
+('23e56790-4f83-11ea-8240-001a4a05014a', 'Mosak', 'Tomasz', 'tmosak@hw.ac.uk', 7, NULL, NULL),
+('23e578be-4f83-11ea-8240-001a4a05014a', 'Alexander', 'Cory', 'calexander@hw.ac.uk', 8, NULL, NULL);
 
 INSERT INTO `classes` (`class_name`, `class_code`, `lecturer`) VALUES
 ('Big Data Management', 'F20BD', '23e50bb7-4f83-11ea-8240-001a4a05014a'),

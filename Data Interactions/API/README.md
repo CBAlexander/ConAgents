@@ -2,20 +2,15 @@
 
 #### Notes
 
-* All Data Should Be Sent POST in Form-Data Format
-* Database Login Credentials Have To Be Passed With POST Params In Every Call:
-
-| Key             | Exemplar                  | Special Format |
-| --------------- | ------------------------- | -------------- |
-| user            | dbu319113                 ||
-| pass            | mykgeh-gIzzez-5ginka      ||
+All Data Should Be Sent POST in Form-Data Format
 
 ## Book Room
-https://www.matthewfrankland.co.uk/conv-agents/book_room.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/book_room.php)
 
 * Sudo Name Of Building From Database Rather Than Full Name
 * Length of Time Is In Minutes
 * Date and Time Can't Be Older Than Present Date
+* Number of People are number of those who would use the room during a booking
 
 | Key             | Exemplar       | Special Format |
 | --------------- | -------------- | -------------- |
@@ -23,13 +18,13 @@ https://www.matthewfrankland.co.uk/conv-agents/book_room.php
 | surname         | Frankland      |                |
 | email           | mf48@hw.ac.uk  |                |
 | room_name       | 1.41           |                |
-| building_name   | EM             |                |
 | book_date       | 2020-02-25     | YYYY-MM-DD     |
 | book_time       | 00:00          | HH:MM          |
 | length_min      | 20             |                |
+| num_people      | 5             |                |
 
 ## Cancel Room
-https://www.matthewfrankland.co.uk/conv-agents/cancel_room.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/cancel_room.php)
 
 * Sudo Name Of Building From Database Rather Than Full Name
 
@@ -45,9 +40,9 @@ https://www.matthewfrankland.co.uk/conv-agents/cancel_room.php
 
 
 ## Find Person
-https://www.matthewfrankland.co.uk/conv-agents/find_person.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/find_person.php)
 
-* Sudo Name Of Building From Database Rather Than Full Name
+Sudo Name Of Building From Database Rather Than Full Name
 
 | Key               | Exemplar        | Special Format |
 | ----------------- | --------------- | -------------- |
@@ -55,33 +50,41 @@ https://www.matthewfrankland.co.uk/conv-agents/find_person.php
 | employee_surname  | Frankland       |                |
 
 ## Future Events
-https://www.matthewfrankland.co.uk/conv-agents/future_events.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/future_events.php)
 
-* Sudo Name Of Building From Database Rather Than Full Name
+Sudo Name Of Building From Database Rather Than Full Name
 
 | Key             | Exemplar   | Special Format |
 | --------------- | ---------- | -------------- |
 | room_name       | 1.41       ||
-| building_name   | EM         ||
 
 ## Employee Check In
-https://www.matthewfrankland.co.uk/conv-agents/employee_check_in.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/employee_check_in.php)
 
-* Employee Email Must Be In Employee Table Of Database
-* Sudo Name Of Building From Database Rather Than Full Name
+Employee Must Be A Name In Employee Table Of Database
+Sudo Name Of Building From Database Rather Than Full Name
 
 | Key             | Exemplar      | Special Format |
 | --------------- | ------------- | -------------- |
-| employee_email  | mf48@hw.ac.uk ||
+| employee  | Matthew Frankland ||
 | room_name       | 1.41          ||
 | building_name   | EM            ||
 
 ## Suggest An Edit
-https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php)
 
-* Email Does Not Have To Be Registered
+Suggestion that a person's details may be wrong
 
 | Key             | Exemplar                                     | Special Format |
 | --------------- | -------------------------------------------- | -------------- |
-| recipient_email | mf48@hw.ac.uk                                ||
-| message         | Anything You Want To Send To The Above Email ||
+| person              | Jack Walker                               ||
+
+## Find A Room
+### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/find_room.php)
+
+Find a room name that can accomodate a certain number of people
+
+| Key             | Exemplar                                     | Special Format |
+| --------------- | -------------------------------------------- | -------------- |
+| num_people              | 2                               ||
+| date              | 2020-04-19                             ||

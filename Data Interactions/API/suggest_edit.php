@@ -9,13 +9,12 @@ $response = array ();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    if (isset($_POST['recipient_email']) && isset($_POST['message'])) {
+    if (isset($_POST['person'])) {
 
         $db = new DbOperation();
-        $res = $db->suggestEdit($db->noHTML($_POST['recipient_email']), $db->noHTML($_POST['message']));
+        $res = $db->suggestEdit($db->noHTML($_POST['person']));
 
         $response['error'] = false;
-        $response['message'] = 'Suggested Edit Sent. Make Sure To Check Your Junk Box If Mail Does Not Appear';
 
     } else {
 

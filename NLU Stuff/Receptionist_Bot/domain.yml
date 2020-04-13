@@ -13,80 +13,57 @@ intents:
 
 entities:
   - room
+  - cancel_room
+  - book_room
+  - day
+  - amount
+  - check_in_room
   - person
-  - building
   - email
-  - message
 
 slots:
   room:
     type: text
+  cancel_room:
+    type: text
+  book_room:
+    type: text
+  check_in_room:
+    type: text
+  day:
+    type: text
+  amount:
+    type: text
   person:
     type: text
-  building:
-    type: text
   email:
-    type: text
-  message:
     type: text
 
 actions:
 - utter_greet
 - utter_goodbye
-- utter_affirm
 - utter_deny
 - utter_stop
-- utter_book
-- utter_cancel
-- utter_details_requested
-- utter_find
-- utter_check_in
-- utter_future_events
-- utter_edit
-- action_hello_world
 - action_find_person
-- action_display_booking_form
-- action_send_email
 - action_find_event
-- action_cancel_booking
+- action_booking
 - action_check_in
+- action_wipe_slots
+- action_utter_booking
+- action_suggest_edit
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hello! Is there anything I can help you with?"
 
-  utter_affirm:
-    - text: "Ok"
+  utter_goodbye:
+    - text: "Bye, speak to you soon!"
 
   utter_deny:
     - text: "Ok, what you want then?!"
 
   utter_stop:
     - text: "I am still a work in progress, sorry"
-
-  utter_book:
-    - text: "To confirm, you want me to book a room for you?"
-
-  utter_cancel:
-    - text: "To confirm, you want me to cancel a room for you?"
-
-  utter_details_requested:
-    - text: "Please enter your details on the tablet to complete booking"
-
-  utter_check_in:
-    - text: "Let me check you in"
-    
-  utter_find:
-    - text: "Let me find that person for you"
-
-  utter_future_events:
-    - text: "Let me see whats on"
-
-  utter_edit:
-    - text: "Do you want me to alert a human to look into this?"
-
-  utter_goodbye:
-  - text: "Bye, speak to you soon!"
 
   utter_magic:
     - text: "The following section has not been created yet. The action you requested will not be completed"

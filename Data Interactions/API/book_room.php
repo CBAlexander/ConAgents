@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($_POST['surname']) &&
         isset($_POST['email']) &&
         isset($_POST['room_name']) &&
-        isset($_POST['building_name']) &&
         isset($_POST['book_date']) &&
         isset($_POST['book_time']) &&
-        isset($_POST['length_min'])
+        isset($_POST['length_min']) &&
+        isset($_POST['num_people'])
       ) {
 
         $db = new DbOperation();
@@ -25,41 +25,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $db->noHTML($_POST['surname']),
           $db->noHTML($_POST['email']),
           $db->noHTML($_POST['room_name']),
-          $db->noHTML($_POST['building_name']),
           $db->noHTML($_POST['book_date']),
           $db->noHTML($_POST['book_time']),
-          $db->noHTML($_POST['length_min'])
+          $db->noHTML($_POST['length_min']),
+          $db->noHTML($_POST['num_people'])
         );
 
         if ($res === -1) {
 
           $response['error'] = true;
-          $response['message'] = 'An Unexpected Error Occured';
+          $response['message'] = 'An unexpected error occured. Please try again later.';
 
         } else if ($res === -2) {
 
           $response['error'] = true;
-          $response['message'] = 'You Have Another Room Booked For This Time. Please Cancel This Room And Try Again';
+          $response['message'] = 'This room is already booked.';
 
         } else if ($res === -3) {
 
           $response['error'] = true;
-          $response['message'] = 'This Room Is Already Booked During This Time';
+          $response['message'] = 'You have supplied an incorrect room number. Please try again later.';
 
         } else if ($res === -4) {
 
           $response['error'] = true;
-          $response['message'] = 'Room Does Not Exist In Given Building';
+          $response['message'] = 'You have supplied an incorrect date. Please try again later.';
 
         } else if ($res === -5) {
 
           $response['error'] = true;
-          $response['message'] = 'Date Or Time Not Formatted Correctly. Refer To Documents';
+          $response['message'] = "Room '".$_POST['room_name']."' does not have a sufficient capacity for ".$_POST['num_people']." people.";
+
+        } else if ($res === -6) {
+
+          $response['error'] = true;
+          $response['message'] = "Room '".$_POST['room_name']."' does not exist.";
 
         } else {
 
           $response['error'] = false;
-          $response['message'] = 'Room Booked';
+          $response['message'] = 'Please complete your booking using this form. I will also store your booking in our simulated database so that my test system can function on future requests.';
 
         }
 

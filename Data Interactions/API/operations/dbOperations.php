@@ -31,40 +31,53 @@ class dbOperation {
      * Cancel A Room Booking
      *
      */
-      public function cancelRoom ($forename, $surname, $email, $room, $building, $date, $time) {
+      public function cancelRoom ($forename, $surname, $email, $room, $date, $time) {
 
-        $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE
-          `forename` = ? AND
-          `surname`=? AND
-          `email`=? AND
-          `room_id`=(SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?)) AND
-          `date_booked`=? AND
-          `time_booked`=?;'
-        );
-        $stmt->bind_param ('sssssss', $forename, $surname, $email, $room, $building, $date, $time);
+        $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ?;');
+        $stmt->bind_param ('s', $room);
         $stmt->execute ();
-        $result = $stmt->get_result();
+        $stmt->store_result();
 
-        if ($result->num_rows == 1) {
+        if ( $stmt->num_rows != 0 ) {
 
-          $data = $result->fetch_all()[0];
+          $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE
+            `forename` = ? AND
+            `surname`=? AND
+            `email`=? AND
+            `room_id`=(SELECT `id` FROM `room` WHERE `room_name` = ?) AND
+            `date_booked`=? AND
+            `time_booked`=?;'
+          );
+          $stmt->bind_param ('ssssss', $forename, $surname, $email, $room, $date, $time);
+          $stmt->execute ();
+          $result = $stmt->get_result();
 
-          $stmt = $this->conn->prepare ('DELETE FROM `room_bookings` WHERE `id` = ?;');
-          $stmt->bind_param ('s', $data[0]);
+          if ($result->num_rows == 1) {
 
-          if ($stmt->execute()) {
+            $data = $result->fetch_all()[0];
 
-            return true;
+            $stmt = $this->conn->prepare ('DELETE FROM `room_bookings` WHERE `id` = ?;');
+            $stmt->bind_param ('s', $data[0]);
+
+            if ($stmt->execute()) {
+
+              return true;
+
+            } else {
+
+              return -1;
+
+            }
 
           } else {
 
-            return -1;
+            return -2;
 
           }
 
         } else {
 
-          return -2;
+          return -3;
 
         }
 
@@ -75,82 +88,95 @@ class dbOperation {
      * Create A New Event For A Given Room
      *
      */
-      public function bookRoom ($forename, $surname, $email, $room, $building, $date, $time, $length) {
+      public function bookRoom ($forename, $surname, $email, $room, $date, $time, $length, $numPeople) {
 
-        if (strtotime($date.' '.$time) > time() && preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time) && preg_match('/^(19|20)\d\d[- \/.](0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])$/', $date)) {
+        $stmt = $this->conn->prepare('SELECT `num_people` FROM `room` WHERE `room_name` = ?;');
+        $stmt->bind_param('s', $room);
+        if ($stmt->execute ()) {
+          $result = $stmt->get_result();
+          $flag = false;
 
-          $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE
-            `room_name` = ? AND
-            `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?);');
-          $stmt->bind_param ('ss', $room, $building);
-          $stmt->execute ();
-          $stmt->store_result();
-          $time_until = strtotime($time) + $length*60;
+          while ($data = $result->fetch_assoc()) {
 
-          if ( $stmt->num_rows > 0 ) {
+            $flag = true;
 
-            $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE
-              `room_id` = (SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?))
-              AND `date_booked` = ? AND
-              ? >= `time_booked` AND
-              ? <= `time_booked_until`;');
-            $stmt->bind_param ('sssss', $room, $building, $date, $time, strftime('%H:%M:%S', $time_until));
-            $stmt->execute ();
-            $stmt->store_result();
+            if ( strval($data["num_people"]) >= $numPeople ) {
 
-            if ( $stmt->num_rows == 0 ) {
+              if (strtotime($date.' '.'23:59:59') > time() && preg_match('/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/', $time) && preg_match('/^(19|20)\d\d[- \/.](0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])$/', $date)) {
 
-              $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE `email`=? AND `date_booked` = ? AND ? >= `time_booked` AND ? <= `time_booked_until`;');
-              $stmt->bind_param ('ssss', $email, $date, $time, strftime('%H:%M:%S', $time_until));
-              $stmt->execute ();
-              $stmt->store_result();
+                $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ?;');
+                $stmt->bind_param ('s', $room);
+                $stmt->execute ();
+                $stmt->store_result();
 
-              if ( $stmt->num_rows == 0 ) {
+                if ( $stmt->num_rows != 0 ) {
 
-                $stmt = $this->conn->prepare ('INSERT INTO
-                  `room_bookings` (
-                    `surname`,
-                    `forename`,
-                    `email`,
-                    `room_id`,
-                    `date_booked`,
-                    `time_booked`,
-                    `time_booked_until`,
-                    `length_min`
-                  ) VALUES ( ?, ?, ?, (SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?)), ?, ?, ?, ? );');
-                $stmt->bind_param ('sssssssss', $surname, $forename, $email, $room, $building, $date, $time, strftime('%H:%M:%S', $time_until), $length);
+                  $time_until = strtotime($time) + $length*60;
+                  $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE
+                    `room_id` = (SELECT `id` FROM `room` WHERE `room_name` = ?)
+                    AND `date_booked` = ? AND
+                    ? >= `time_booked` AND
+                    ? <= `time_booked_until`;');
+                  $stmt->bind_param ('ssss', $room, $date, $time, strftime('%H:%M:%S', $time_until));
+                  $stmt->execute ();
+                  $stmt->store_result();
 
-                if ($stmt->execute ()) {
+                  if ( $stmt->num_rows == 0 ) {
 
-                  return true;
+                    $stmt = $this->conn->prepare ('INSERT INTO
+                      `room_bookings` (
+                        `surname`,
+                        `forename`,
+                        `email`,
+                        `room_id`,
+                        `date_booked`,
+                        `time_booked`,
+                        `time_booked_until`,
+                        `length_min`
+                      ) VALUES ( ?, ?, ?, (SELECT `id` FROM `room` WHERE `room_name` = ?), ?, ?, ?, ? );');
+                    $stmt->bind_param ('ssssssss', $surname, $forename, $email, $room, $date, $time, strftime('%H:%M:%S', $time_until), $length);
+
+                    if ($stmt->execute ()) {
+
+                      return true;
+
+                    } else {
+
+                      return -1;
+
+                    }
+
+                  } else {
+
+                    return -2;
+
+                  }
 
                 } else {
 
-                  return -1;
+                  return -3;
 
                 }
 
               } else {
 
-                return -2;
+                return -4;
 
               }
 
             } else {
 
-              return -3;
+              return -5;
 
             }
 
-          } else {
-
-            return -4;
-
           }
 
-        } else {
+          if (!$flag) {
 
-          return -5;
+            return -6;
+
+          }
 
         }
 
@@ -217,17 +243,17 @@ class dbOperation {
      * Find All Future Events For A Given Event
      *
      */
-      public function futureEvents ($roomName, $buildingName) {
+      public function futureEvents ($roomName) {
 
         $stmt = $this->conn->prepare ('SELECT
             `date_booked`,
             `time_booked`
           FROM `room_bookings` WHERE
-            (`date_booked` > CURDATE() OR
-            (`date_booked` = CURDATE() AND `time_booked` > CURTIME())) AND
-            `room_id`=(SELECT `id` FROM `room` WHERE `room_name`=? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?));');
+            `date_booked` > CURDATE() AND
+            `time_booked` > CURTIME() AND
+            `room_id`=(SELECT `id` FROM `room` WHERE `room_name`=?);');
 
-        $stmt->bind_param ('ss', $employeeEmail, $buildingName);
+        $stmt->bind_param ('s', $roomName);
 
         if ($stmt->execute ()) {
 
@@ -255,13 +281,14 @@ class dbOperation {
      * Suggest An Edit And Send To Given Recipient
      *
      */
-      public function suggestEdit ($recipient_email, $message) {
+      public function suggestEdit ($person) {
 
+          $recipient_email = 'mf48@hw.ac.uk';
           $subject = 'Edit Suggestion';
           $headers = 'MIME-Version: 1.0' . "\r\n";
           $headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
           $headers .= 'From: AlanaChatbot<noreply@alana.com>' . "\r\n";
-
+          $message = "The data on ".$person." may be out of date. Please verify this information.";
           mail($recipient_email,$subject,$message,$headers);
 
           return true;
@@ -273,12 +300,13 @@ class dbOperation {
      * Check In A User
      *
      */
-      public function userCheckIn ($employeeEmail, $roomName, $buildingName) {
+      public function userCheckIn ($employee, $roomName) {
 
-          if ($this->isUserExistEmail($employeeEmail)) {
+          $names = explode(" ", $employee);
+          if ($this->isUserExistName($names[0], $names[1])) {
 
-            $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ? AND `building_id`=(SELECT `id` FROM `buildings` WHERE `sudo_name`=?);');
-            $stmt->bind_param ('ss', $roomName, $buildingName);
+            $stmt = $this->conn->prepare ('SELECT `id` FROM `room` WHERE `room_name` = ?;');
+            $stmt->bind_param ('s', $roomName);
             $stmt->execute ();
             $stmt->store_result();
 
@@ -288,8 +316,8 @@ class dbOperation {
                 `last_check_in_location`=(SELECT `id` FROM `room` WHERE `room_name`=?),
                 `last_check_in_date`=CURDATE(),
                 `last_check_in_time`=CURTIME()
-              WHERE `email`=?');
-              $stmt->bind_param ('ss', $roomName, $employeeEmail);
+              WHERE `forename`=? AND `surname`=?');
+              $stmt->bind_param ('sss', $roomName, $names[0], $names[1]);
 
               if ($stmt->execute ()) {
 
@@ -315,14 +343,38 @@ class dbOperation {
 
       }
 
-      private function isUserExistEmail ($email) {
+      /**
+       *
+       * Find a free room based on number of users
+       *
+       */
+      public function findRoom ($numPeople, $date) {
 
-        $stmt = $this->conn->prepare('SELECT `id` FROM `employees` WHERE `email` = ?;');
-        $stmt->bind_param('s', $email);
-        $stmt->execute();
-        $stmt->store_result();
-        return $stmt->num_rows > 0;
+        $stmt = $this->conn->prepare('SELECT `room_name` FROM `room` WHERE `num_people` >= ?;');
+        $stmt->bind_param('s', $numPeople);
+        if ($stmt->execute ()) {
+          $result = $stmt->get_result();
 
+          while ($data = $result->fetch_assoc()) {
+
+            $stmt = $this->conn->prepare ('SELECT `id` FROM `room_bookings` WHERE
+              `room_id` = (SELECT `id` FROM `room` WHERE `room_name` = ?)
+              AND `date_booked` = ?;');
+            $stmt->bind_param ('ss', $data['room_name'], $date);
+            $stmt->execute ();
+            $stmt->store_result();
+
+            if ( $stmt->num_rows == 0 ) {
+
+              return $data['room_name'];
+
+            }
+
+          }
+
+          return "";
+
+        }
       }
 
       private function isUserExistName ($forename, $surname) {

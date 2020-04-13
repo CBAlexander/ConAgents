@@ -1,0 +1,45 @@
+{
+  "actions": [
+    {
+      "description": "Default Welcome Intent",
+      "name": "MAIN",
+      "fulfillment": {
+        "conversationName": "Local Receptionist"
+      },
+      "intent": {
+        "name": "actions.intent.MAIN",
+        "trigger": {
+          "queryPatterns": [
+            "Talk to the Receptionist"
+          ]
+        }
+      }
+    },
+    {
+      "description": "Rasa Intent",
+      "name": "TEXT",
+      "fulfillment": {
+        "conversationName": "rasa_intent"
+      },
+      "intent": {
+        "name": "actions.intent.TEXT",
+        "trigger": {
+          "queryPatterns": []
+        }
+      }
+    }
+  ],
+  "conversations": {
+    "Local Receptionist": {
+      "name": "Local Receptionist",
+      "url":  "https://25919efe.ngrok.io/webhooks/google_assistant/webhook",
+      "fulfillmentApiVersion": 2
+    },
+    "rasa_intent": {
+        "name": "rasa_intent",
+        "url": "https://25919efe.ngrok.io/webhooks/google_assistant/webhook",
+        "fulfillmentApiVersion": 2
+    }
+  },
+  "locale": "en"
+}
