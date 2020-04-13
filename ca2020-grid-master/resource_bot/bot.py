@@ -1,9 +1,9 @@
 from flask import Flask, request
 from flask_restful import Api
 from argparse import ArgumentParser
-from utils import log
-from utils.abstract_classes import Bot
-from utils.dict_query import DictQuery
+from utils.utils import log
+from utils.utils.abstract_classes import Bot
+from utils.utils.dict_query import DictQuery
 from bs4 import BeautifulSoup
 #from tidylib import tidy_document
 import sys
@@ -17,12 +17,12 @@ one_up = dirname(dirname(filepath))
 
 # local modules
 sys.path.append(os.path.join(one_up, "grid_libraries"))
-from grid_neo4j.grid_neo4j import GridNeoConnector
-from grid_nlg.nlg import generate_pc_sentence, generate_room_list
-from grid_nlg.nlg import room_clarification_request, clarification_failure_response
-from grid_nlu.nlu import Grid_NLU, NLU_Type, Intent_Type
-from grid_functions.helper_functions import force_pick, should_stay_silent, check_previous_response
-from grid_functions.helper_functions import clarify_incomplete_room, respond_with_room_list
+from grid_libraries.grid_neo4j.grid_neo4j import GridNeoConnector
+from grid_libraries.grid_nlg.nlg import generate_pc_sentence, generate_room_list
+from grid_libraries.grid_nlg.nlg import room_clarification_request, clarification_failure_response
+from grid_libraries.grid_nlu.nlu import Grid_NLU, NLU_Type, Intent_Type
+from grid_libraries.grid_functions.helper_functions import force_pick, should_stay_silent, check_previous_response
+from grid_libraries.grid_functions.helper_functions import clarify_incomplete_room, respond_with_room_list
 
 app = Flask(__name__)
 api = Api(app)

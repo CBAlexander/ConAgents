@@ -1,5 +1,5 @@
 from enum import Enum
-from utils import log
+from utils.utils import log
 import sys
 import re
 
@@ -124,7 +124,7 @@ class Grid_NLU():
         self.logger.info("-----------------------------------------------------------------------")
         self.logger.info("INTENT: "+str(grid_intent.type)+", confidence: "+str(confidence))
 
-        entites = rasa_data.get("entites")
+        entites = rasa_data.gt("entites")
 
         try:
             for entity in entites:
