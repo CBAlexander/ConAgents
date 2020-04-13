@@ -1,0 +1,17 @@
+jesus
+isis
+islam
+prophet
+jews?
+muslims?
+sho+t
+suicid(?:es?|al)
+whores?
+kill(?:s|ed|ing)?
+murder(?:s|ed|ing)?
+(?:have|had|having) sex with
+sexual(?:ize|ized|ization)?
+sex
+sex(?:pert|er|pot|ploration|ploitation|ful|less|boat)
+(?:cyber|electro|leather|de|un)sex
+(?:get|getting|got|gotten) laid

@@ -23,13 +23,13 @@ cd ..
 echo -e "\nInstalling requirements for resource bot...\n"
 cd resource_bot && pip install -r requirements.txt
 
-cd ..
-echo -e "\nInstalling requirements for persona bot...\n"
-cd persona_bot && pip install -r requirements.txt
+#cd ..
+#echo -e "\nInstalling requirements for persona bot...\n"
+#cd persona_bot && pip install -r requirements.txt
 
-cd ..
-echo -e "\nInstalling requirements for coherence bot...\n"
-cd coherence_bot && pip install -r requirements.txt
+#cd ..
+#echo -e "\nInstalling requirements for coherence bot...\n"
+#cd coherence_bot && pip install -r requirements.txt
 
 cd ..
 echo -e "\nInstalling supporting packages...\n"

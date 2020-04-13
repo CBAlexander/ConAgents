@@ -1,0 +1,9 @@
+# Configuration for Receptionist Bot NLU.
+language: en
+pipeline: supervised_embeddings
+
+# Configuration of Policies used
+policies:
+  - name: MemoizationPolicy
+  - name: KerasPolicy
+  - name: MappingPolicy

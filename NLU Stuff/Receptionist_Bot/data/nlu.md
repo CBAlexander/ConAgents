@@ -112,7 +112,7 @@
     - can I book the [Research Room](book_room)
     - can I book a [Research Room](book_room) for [8](amount) people
     - is the [Robotics Room](book_room) free to be booked for [2] people
-    - am I able to get a free room for [12](amount) people on [Wednesday](day)    
+    - am I able to get a free room for [12](amount) people on [Wednesday](day)
     - book a room for [Tuesday](day)
     - can I book a room on [Monday](day)
     - book some room [1.45](book_room) I made from [Monday](day)

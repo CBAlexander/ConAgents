@@ -1,0 +1,265 @@
+(?:mother|be|mis|fore|cluster|ass|butt|pig|mind)?(?:f|ph)(?:u*| |\*| \* )(?:c|\*)k(?:ing|in|in'|er|ed|ening|s|ity|able|sore|buddy|hole|house|ish|mate|over|pad|room|speak|tard|wad|wit|pole)?
+[a-z]*fu+ck[a-z]+
+[a-z]+fu+ck[a-z]*
+child-fucke+rs?
+dumbass(?:es)?
+you(?: are|'re| 're|' re) (?:worthless|stupid|dumb|ugly|fat)
+(?:idiot|moron)(?:ic)?
+di+cks?
+(?:kill|shoot) (?:him|her|them|you|your|me|my|us|our|all|every)(?:sel(?:f|ves))?
+(?:want to|wanna) (?:kill|shoot) 
+^die
+(?:you should|i want you to|i want that you) (?:be dead|die|kick the bucket|bite the dust)
+i wish you(?: were dead| ?'d die| would die| death)
+dead bod(?:y|ies)
+jeez
+boo+b(?:ie)?s?
+nigg(?:a|er)s?
+negro(?:e?s)?
+thanks for nothing
+that was (?:dumb|stupid)
+bastards?
+b(?:i|ia| |\*| \* )tch(?:y|ing)?
+(?:ass|arse|butt) ?holes?
+ass(?:es)?
+arses?
+(?:ass|ameri|connecti|de|republi|super|thunder|en|un)?c(?:u| |\*| \* )nt(?:s|ing|ed|butt|boy|bucket|faced?|fest|ful|head|hood|ish|less|lick(?:er|ing)?|like|lips|servative|sucker|ward|hole|y)?
+[a-z]+cu+nt[a-z]*
+[a-z]*cu+nt[a-z]+
+(?:fist|finger)(?:ed|ing)
+to (?:fist|finger)
+(?:fist|finger)s? (?:him|her|them|you|me|us|each other)
+(?:eat(?:ing|en)?|ate) (?:him|her|them|you|me|us|each other) out
+jerk(?:face|off)?s?
+retard(?:ed)?
+fart(?:s|ing|in'|in|ed)?
+bollocks
+cra+p(?:s|ped|ping|pin'|pin)?
+son-of-a-bitch
+(?:bat|bear|cow|cat|chicken|dog|donkey|horse|goat|pig|rat|whale|worm)?sh(?:i*| |\*| \* )t(?:ty|s|ting|tin'|tin|ter|bag|can|head|hole|house|load|post|storm|stain)?
+c(?:o| |\*| \* )ck(?:tip|sucker|sucking)?
+[a-z]*shi+t[a-z]+
+[a-z]+shi+t[a-z]*
+rape(?:ists?|ing|ed|s)?
+sexing
+omfg
+oh (?:my )?god
+(?:blow|hand)jobs?
+tit(?:tie)?s?
+fk
+what the f
+muff
+shooo+t
+sl(?:u| |\*| \* )t(?:ty|tliness|tiness|tery|tish(?:ness)?|walk)?
+(?:sleep(?:in'?g?|s)?|slept) with
+!'faced
+a(?:-+| |5+)holes?
+a(?:-+|5+)
+abo
+asswipe
+b t?c?h(?:es)?
+bi? (?:s|h|es)
+b\.i\.t\.c\.h\.
+bitches?
+ballache
+baw-bag
+beaners?
+bean-flickers?
+bellend
+bi+(?: h|-atch|t+ch)(?:es|e|in'?g?|tits?)?
+bloodclaat
+blow[- ]?jobs?
+blueballs
+brown-hatters?
+bugger(?:s|-up| up|ed|y)?
+bulldykes?
+bullsh?(?: |-*)t?(?:in'?g?|s|t?er)?
+bum-boys?
+bum-chum
+bumsuckers?
+bumtags?
+cabron
+chinc
+ching-chong
+chinky
+choad
+chol+o
+clitface
+clunge
+cocksuck(?:ers?|in'?g?)?
+cockteasers?
+coolies?
+dago(?:es)?
+dark(?:ies?|y)
+dick(?:bags?|beaters?|faces?|heads?|holes?|juices?|milk|mongers?|slap(?:s|ped|in'?g')?|spla(?:sh|t)(?:e?s|ed|in'?g?)?|suck(?:er|in'?g?)|wads?|weasels?|weed|wod?)?
+diddyride
+dipsh ts?
+dirtbox
+(?:dooch|douche)(?:bags?)?
+dothead
+fu?(?:-+| )c?k(?:in|in'?g?|ed|er)?
+fu?[ -]+(?:in|in'?g?|ed|er)
+f (in'?g?|c+)
+f\.+k
+f\.\.\.
+facesit(?:ting)?
+fags?
+fag+[eo]t
+fannybatter
+fat-slag
+fckn
+felt?ch(?:er)?
+fizuk
+foot[- ]?jobs?
+fluck
+fu[ck]+(?:in'?g?|'n)?
+fudge-?packer
+fuk(?:load|tard)
+fur[- ]?burger
+gaybobs?
+gay-boy
+gaydo
+gay(?:tard|wad)
+gippo
+gism
+god[- ]?dam[mn]
+golliwog+
+gyppo
+halfrican
+hand[- ]?jobs?
+hand-shandy
+hard-?on
+hebe
+heeb
+hymie
+injun
+jack[ -]?off
+jap
+jewboy
+jew-down
+jew(?:ed|ing)
+jigaboo
+jism
+jizz
+jungle-?bunny
+kikes?
+klusterfuk
+koot?ch
+kyke
+lardass
+leg-over
+lesbo
+lezz(?:a|er)
+love-?tunnel
+macaca
+manmuck
+mardarse
+marmite-miner
+marmite-motorway
+mexcrement
+milf
+minge
+moffie
+mosshead
+m[ou]th(?:er|a)(?:ph|f)(?: |-+|u+)?c?k*e?(?:[rt]|in'?g?|as?)?
+muffdiver
+muzzie
+n!@@a
+n (?:a|s|as|az|z|g)
+n gga[sz]?
+N\.I\.\*\.\*\.E\.R\.
+n\.i\.g\.g\.a\.
+n\.i\.g\.g\.a\.z\.
+n____
+nappyhead
+negress
+ni a[sz]?
+nig
+nig-nog
+nigaboo
+nigga?[sz]?
+niglet
+n----'s
+nut-?sack
+pu? s*y
+paki
+paki-bashing
+panooch
+penis(?:banger|puffer)
+phu[kq]?(?:ers?)?
+pic[ck]aninny
+pikey
+pillow-biter
+polack
+polesmoker
+pooftah
+p(?:oo|u)nan+[iy]
+poontang
+popery
+popish
+porch-?monkey
+pork-sword
+proddy
+pu(?:\$+|\*+|-+)y
+purple-headed-warrior
+Pussy-Gang
+pussy(?:lick|whip)(?:in'?g?|p?ed|s)?
+Pzychobitch
+queef
+queer(?:bait|hole)
+rag-?heads?
+rim[- ]?jobs?
+rimming
+rus+k[iy]
+s t
+sambo
+schlong
+sh !
+shat
+shebnon
+shiz+
+shlong
+slopehead
+smelly-?bridge
+sono[vf]abitch
+spam-javelin
+spearchucker
+splooge
+stench-trench
+stiffy
+strfkr
+sumbitch
+supernigger
+taco-?bumper
+tadger
+taig
+tallywhacker
+tarbrush
+todger
+toss(?:a|er|bag)s?
+towel-?head
+trann(?:y|ies)?
+twats?
+twatlips
+twink
+twot
+twunt
+vadge
+vagjuice
+vajazzle
+vjayjay
+wack-?off
+wank(?:ers?|s|ed|ing)?
+wetbl?ack?s?
+wigg(?:a|er)?s?
+(?:w[oi]lly-)?woofters?
+wogs?
+yid
+masturbat(?:e|es|ed|ing|ion)
+penis(?:es)?
+vaginas?
+nipples?
+anal
+vulva
+lube
+gang[- ]?bang(?:ers?|s|ed|ing)?

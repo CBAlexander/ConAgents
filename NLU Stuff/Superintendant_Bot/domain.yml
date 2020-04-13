@@ -1,0 +1,51 @@
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - stop
+  - bot_challenge
+  - request_human
+  - report_issue
+
+actions:
+- utter_greet
+- utter_goodbye
+- utter_affirm
+- utter_deny
+- utter_stop
+- utter_bot
+- utter_human
+- utter_report
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_affirm:
+    - text: "Ok"
+
+  utter_deny:
+    - text: "Ok, what you want then?!"
+
+  utter_stop:
+    - text: "I am still a work in progress, sorry"
+
+  utter_bot:
+    - text: "I am little chinese boy. Inglish good?"
+
+  utter_human:
+    - text: "Do you want me to alert a human?"
+
+  utter_report:
+    - text: "I am reporting the issue"
+
+  utter_goodbye:
+  - text: "Bye, speak to you soon!"
+
+  utter_magic:
+    - text: "The following section has not been created yet. The action you requested will not be completed"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
