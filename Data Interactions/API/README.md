@@ -68,7 +68,6 @@ Sudo Name Of Building From Database Rather Than Full Name
 | --------------- | ------------- | -------------- |
 | employee  | Matthew Frankland ||
 | room_name       | 1.41          ||
-| building_name   | EM            ||
 
 ## Suggest An Edit
 ### [Request URL](https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php)
