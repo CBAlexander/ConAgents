@@ -21,10 +21,8 @@ NLU - Two bots that Tomasz has created and Matthew has used for Home hub
 CA2020-grid-master - Data interaction is the backend, the database and dummy API
 
 # Set up
-```
-git clone
-```
-Follow instructions from step 2 onwards [here](https://github.com/HWUConvAgentsProject/CA2020_instructions/blob/master/alana_setup/Week2_lab_instructions.md)
+1. Clone this repo
+2. Follow instructions from step 2 onwards [here](https://github.com/HWUConvAgentsProject/CA2020_instructions/blob/master/alana_setup/Week2_lab_instructions.md)
 
 # Roadmap
 See the [GitHub Project](https://github.com/CBAlexander/ConAgents/projects/1)
