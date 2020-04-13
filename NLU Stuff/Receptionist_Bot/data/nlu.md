@@ -90,7 +90,7 @@
 - could you please book me a room for [5](amount) people
 - can I book the [Research Room](specific_room)
 - can I book a [Research Room](specific_room) for [8](amount) people
-- is the [Robotics Room](specific_room) free to be booked for [2] people
+- is the [Robotics Room](specific_room) free to be booked for [2](amount) people
 - am I able to get a free room for [12](amount) people
 
 ## intent:find_person
