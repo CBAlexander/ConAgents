@@ -7,7 +7,9 @@ The new conversational agent integrates multi-modal input and output to provide 
 
 ## Receptionist bot
 - [ ] Book a room
+- [ ] Cancel a room
 - [ ] Person find
+- [ ] Check in to a room
 - [ ] Suggest an edit
 - [ ] Upcoming events
 
