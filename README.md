@@ -18,7 +18,7 @@ The new conversational agent integrates multi-modal input and output to provide 
 # Project Structure
 CA2020-grid-master - Provided code, this is the glue that ties our system into alana bot                                
 NLU - Two bots that Tomasz has created and Matthew has used for Home hub
-CA2020-grid-master - Data interaction is the backend, the database and dummy API
+Data Interactions - Data interaction is the backend, the database and dummy API
 
 # Set up
 1. Clone this repo
