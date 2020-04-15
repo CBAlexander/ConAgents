@@ -79,7 +79,7 @@ class ProcessBookingRequest(Action):
         if bookingFlag:
             if amount != None and tracker.get_slot("book_room") == None:
                 room = self.findRoom(amount, date.strftime("%Y-%m-%d"), dispatcher)
-                if room == "": dispatcher.utter_message(text="There are no rooms available for " + amount + " people.")
+                if room == "": dispatcher.utter_message(text="There are no rooms available.")
                 if room == False or room == "": return [AllSlotsReset()]
             else:
                 room = tracker.get_slot("book_room")
@@ -100,7 +100,6 @@ class ProcessBookingRequest(Action):
             else:
                 dispatcher.utter_message(text="I have temporarily cancelled room '" + tracker.get_slot("cancel_room") + "' which was booked for the " + date.strftime("%d %b, %Y") + ". " + response['message'])
             dispatcher.utter_message(text="Show QR Code")
-
         return [AllSlotsReset()]
 
 class CheckIn(Action):
@@ -131,10 +130,10 @@ class FindEvents(Action):
                 if len(response['message']) == 0:
                     dispatcher.utter_message(text="No events are currently scheduled in " + tracker.get_slot("room") + ".")
                 else:
-                    response = tracker.get_slot("room") + " is booked at the following times: "
+                    message = tracker.get_slot("room") + " is booked at the following times: "
                     for booking in response['message']:
-                        response += booking['date_booked'] + ", "
-                    response = response[:-2]
+                        message += booking['date_booked'] + ", "
+                    message = message[:-2]
                     dispatcher.utter_message(text=message)
         else:
             dispatcher.utter_message(text="I can't give you all the events in the building. Obviously! You must give me a specific room.")

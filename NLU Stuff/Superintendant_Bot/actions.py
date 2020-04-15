@@ -46,9 +46,8 @@ class RequestHuman(Action):
         data = { 'user': 'dbu319113', 'pass': 'mykgeh-gIzzez-5ginka' }
         response = sendPOST("https://www.matthewfrankland.co.uk/conv-agents/request_human.php", data, dispatcher)
         
-        print(response)
         if response != False:
-            dispatcher.utter_message(text="A human has been request and will attend your location shortly.")
+            dispatcher.utter_message(text="A human has been requested and will attend your location shortly.")
         return []
 
 class WipeSlots(Action):

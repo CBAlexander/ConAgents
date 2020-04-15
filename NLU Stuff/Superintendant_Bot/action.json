@@ -4,13 +4,13 @@
       "description": "Default Welcome Intent",
       "name": "MAIN",
       "fulfillment": {
-        "conversationName": "Superintendant Agent"
+        "conversationName": "Superintendent Agent"
       },
       "intent": {
         "name": "actions.intent.MAIN",
         "trigger": {
           "queryPatterns": [
-            "Talk to the Superintendant"
+            "Talk to the Superintendent"
           ]
         }
       }
@@ -30,8 +30,8 @@
     }
   ],
   "conversations": {
-    "Superintendant Agent": {
-      "name": "Superintendant Agent",
+    "Superintendent Agent": {
+      "name": "Superintendent Agent",
       "url":  "https://7ff07789.ngrok.io/webhooks/google_assistant/webhook",
       "fulfillmentApiVersion": 2
     },

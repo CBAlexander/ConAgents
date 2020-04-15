@@ -1,4 +1,4 @@
-# Configuration for Receptionist Bot NLU.
+# Configuration for Superintendent Bot NLU.
 language: en
 pipeline:
     - name: WhitespaceTokenizer
