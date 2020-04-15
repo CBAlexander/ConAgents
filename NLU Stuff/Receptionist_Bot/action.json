@@ -32,12 +32,12 @@
   "conversations": {
     "Local Receptionist": {
       "name": "Local Receptionist",
-      "url":  "https://25919efe.ngrok.io/webhooks/google_assistant/webhook",
+      "url":  "https://7ff07789.ngrok.io/webhooks/google_assistant/webhook",
       "fulfillmentApiVersion": 2
     },
     "rasa_intent": {
         "name": "rasa_intent",
-        "url": "https://25919efe.ngrok.io/webhooks/google_assistant/webhook",
+        "url": "https://7ff07789.ngrok.io/webhooks/google_assistant/webhook",
         "fulfillmentApiVersion": 2
     }
   },

@@ -80,12 +80,6 @@
     - can I check in [Tomasz Mosak](person) to room [1.46](check_in_room)
     - check in [Keir Convery](person) to room [1.46](check_in_room)
 
-## intent:bot_challenge
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
-
 ## intent:cancel_room
     - I'd like to cancel room [1.46](cancel_room)
     - cancel room [1.46](cancel_room)
@@ -108,13 +102,14 @@
     - can I book the [Research Room](book_room)
     - I'd like to book room [1.46](book_room) for [2](amount) collegues
     - book me room [1.46](book_room) for [3](amount) people
+    - book a room for [5](amount) people
+    - book a room for [5](amount) people on [Sunday](day)
     - could you please book me a room for [5](amount) people
     - can I book the [Research Room](book_room)
     - can I book a [Research Room](book_room) for [8](amount) people
     - is the [Robotics Room](book_room) free to be booked for [2] people
     - am I able to get a free room for [12](amount) people on [Wednesday](day)
     - book a room for [Tuesday](day)
-    - can I book a room on [Monday](day)
     - book some room [1.45](book_room) I made from [Monday](day)
     - book me room [1.46](book_room) for [3](amount) people
     - could you please book me a room for [5](amount) people

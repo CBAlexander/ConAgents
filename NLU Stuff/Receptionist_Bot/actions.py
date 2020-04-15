@@ -38,7 +38,7 @@ class FindPerson(Action):
                 else:
                     dispatcher.utter_message(text=data['employee_forename'] + " " + data['employee_surname'] + " last checked in on " + response['message'][0]['last_check_in_date'] + " at " + response['message'][0]['last_check_in_time'] + " in Room " + response['message'][0]['last_check_in_room'] + ".")
         else:
-            dispatcher.utter_message(text="Can't find anyone if I don't know who you want to find - obviously!")
+            dispatcher.utter_message(text="Can't find anyone if I don't know who you want to find. Obviously! Lets try again. Who do you want to find?")
         return [AllSlotsReset()]
 
 class SuggestEdit(Action):
@@ -52,7 +52,7 @@ class SuggestEdit(Action):
             response = sendPOST("https://www.matthewfrankland.co.uk/conv-agents/suggest_edit.php", data, dispatcher)
             if response != False: dispatcher.utter_message(text="I will send your suggested update to my system administrators. Thank you!")
         else:
-            dispatcher.utter_message(text="Can't send an edit suggestion if you don't tell me who's data is incorrect - obviously!")
+            dispatcher.utter_message(text="Can't send an edit suggestion if you don't tell me who's data is incorrect. Obviously! Lets try again. What edit do you want to suggest?")
         return [AllSlotsReset()]
         
 class ProcessBookingRequest(Action):
@@ -115,7 +115,7 @@ class CheckIn(Action):
             if response != False:
                 dispatcher.utter_message(text=tracker.get_slot("person") + " has been checked in to " + tracker.get_slot("check_in_room"))
         else:
-            dispatcher.utter_message(text="Can't check in if I don't know who to check in and where to check them into - obviously!")
+            dispatcher.utter_message(text="Can't check in if I don't know who to check in and where to check them into. Obviously! Lets try again. Who and where do you want to check in?")
         return [AllSlotsReset()]
 
 class FindEvents(Action):
@@ -137,7 +137,7 @@ class FindEvents(Action):
                     response = response[:-2]
                     dispatcher.utter_message(text=message)
         else:
-            dispatcher.utter_message(text="I can't give you all the events in the building you know - obviously! You must give me a specific room.")
+            dispatcher.utter_message(text="I can't give you all the events in the building. Obviously! You must give me a specific room.")
         return [AllSlotsReset()]
 
 class WipeSlots(Action):

@@ -27,7 +27,6 @@ class ReportIssue(Action):
         return "action_report"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print('Test')
         if tracker.get_slot("object") != None:
             data = { 'user': 'dbu319113', 'pass': 'mykgeh-gIzzez-5ginka', 'object': tracker.get_slot("object") }
             response = sendPOST("https://www.matthewfrankland.co.uk/conv-agents/report_issue.php", data, dispatcher)
