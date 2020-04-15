@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: utils
+Version: 0.0.37
+Summary: Common helper functions for Alana bots
+Home-page: https://github.com/WattSocialBot/utils
+Author: Ondrej Dusek, Ioannis Papaioannou, Alessandro Suglia, Igor Shalyminov
+Author-email: ipapaioannou83@gmail.com
+License: MIT
+Download-URL: https://github.com/WattSocialBot/utils.git
+Description: UNKNOWN
+Platform: UNKNOWN

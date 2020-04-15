@@ -1,11 +1,26 @@
 ## report issue
-* report_issue
-  - utter_report
+    * report_issue
+        - action_report
 
 ## request_human
-  - utter_human
+    * request_human
+        - utter_human
+    * affirm
+        - action_request
+    * deny
+        - utter_deny
+        - action_wipe_slots
 
-## say goodbye
-* goodbye
-  - utter_goodbye
+## bot_challenge
+    * bot_challenge
+        - utter_bot
 
+## start_system
+    * greet
+        - utter_greet
+    
+## stop_system
+    * goodbye
+        - utter_goodbye
+    * stop
+        - utter_stop

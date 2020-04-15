@@ -8,15 +8,24 @@ intents:
   - request_human
   - report_issue
 
+entities:
+  - object
+
+slots:
+  object:
+    type: text
+
 actions:
-- utter_greet
-- utter_goodbye
-- utter_affirm
-- utter_deny
-- utter_stop
-- utter_bot
-- utter_human
-- utter_report
+  - utter_greet
+  - utter_goodbye
+  - utter_affirm
+  - utter_deny
+  - utter_stop
+  - utter_bot
+  - utter_human
+  - action_report
+  - action_request
+  - action_wipe_slots
 
 responses:
   utter_greet:
@@ -32,19 +41,13 @@ responses:
     - text: "I am still a work in progress, sorry"
 
   utter_bot:
-    - text: "I am little chinese boy. Inglish good?"
-
+    - text: "What you on about?"
+    
   utter_human:
     - text: "Do you want me to alert a human?"
 
-  utter_report:
-    - text: "I am reporting the issue"
-
   utter_goodbye:
-  - text: "Bye, speak to you soon!"
-
-  utter_magic:
-    - text: "The following section has not been created yet. The action you requested will not be completed"
+    - text: "Bye, speak to you soon!"
 
 session_config:
   session_expiration_time: 60

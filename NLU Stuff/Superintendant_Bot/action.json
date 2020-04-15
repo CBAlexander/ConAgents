@@ -1,0 +1,45 @@
+{
+  "actions": [
+    {
+      "description": "Default Welcome Intent",
+      "name": "MAIN",
+      "fulfillment": {
+        "conversationName": "Superintendant Agent"
+      },
+      "intent": {
+        "name": "actions.intent.MAIN",
+        "trigger": {
+          "queryPatterns": [
+            "Talk to the Superintendant"
+          ]
+        }
+      }
+    },
+    {
+      "description": "Rasa Intent",
+      "name": "TEXT",
+      "fulfillment": {
+        "conversationName": "rasa_intent"
+      },
+      "intent": {
+        "name": "actions.intent.TEXT",
+        "trigger": {
+          "queryPatterns": []
+        }
+      }
+    }
+  ],
+  "conversations": {
+    "Superintendant Agent": {
+      "name": "Superintendant Agent",
+      "url":  "https://7ff07789.ngrok.io/webhooks/google_assistant/webhook",
+      "fulfillmentApiVersion": 2
+    },
+    "rasa_intent": {
+        "name": "rasa_intent",
+        "url": "https://7ff07789.ngrok.io/webhooks/google_assistant/webhook",
+        "fulfillmentApiVersion": 2
+    }
+  },
+  "locale": "en"
+}

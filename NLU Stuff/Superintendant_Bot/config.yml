@@ -1,9 +1,17 @@
 # Configuration for Receptionist Bot NLU.
 language: en
-pipeline: supervised_embeddings
+pipeline:
+    - name: WhitespaceTokenizer
+    - name: RegexFeaturizer
+    - name: CRFEntityExtractor
+    - name: EntitySynonymMapper
+    - name: CountVectorsFeaturizer
+    - name: CountVectorsFeaturizer
+    - name: DIETClassifier
+      epochs: 300
 
 # Configuration of Policies used
 policies:
   - name: MemoizationPolicy
-  - name: KerasPolicy
+  - name: TEDPolicy
   - name: MappingPolicy
