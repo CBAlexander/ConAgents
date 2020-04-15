@@ -32,6 +32,6 @@ and then to update thereafter:
 
 Replace <Name> for each bot:
 Receptionist Bot = convagents-9bdf5
-Superintendant Bot = convagents-62e61
+Superintendent Bot = convagents-62e61
 
 Will need to first authenticate using a Google developer account. The action will be saved under that account. Any device (i.e. Google Nest) that is signed in to the account the action is saved under will be able to use the given action.

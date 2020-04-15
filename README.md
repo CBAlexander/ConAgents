@@ -13,7 +13,7 @@ The new conversational agent integrates multi-modal input and output to provide 
 - [ ] Suggest an edit
 - [ ] Upcoming events
 
-## Superindendant bot
+## Superindendent bot
 - [ ] Report a fault
 - [ ] Request assistance
 
