@@ -26,11 +26,11 @@ Creates server instance that generates RASA responses. These are then passed bac
 ## 4th Terminal Instance
 
 To push a RASA bot to a Google action use (inintially):
-* ./gactions test --action_package action.json --project <Name>
+* ./gactions test --action_package action.json --project **Name**
 and then to update thereafter:
-* ./gactions update --action_package action.json --project <Name>
+* ./gactions update --action_package action.json --project **Name**
 
-Replace <Name> for each bot:
+Replace **Name** for each bot:
 Receptionist Bot = convagents-9bdf5
 Superintendent Bot = convagents-62e61
 
